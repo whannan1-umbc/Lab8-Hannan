@@ -2,25 +2,26 @@
 #include <LiquidCrystal_I2C.h>
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);   
-const int analogPin = A0;
 const float vRef = 5.0;
+const int analogPin = A0;
 
 void setup() {
+# Sets up
   Serial.begin(9600);
   lcd.init();
   lcd.backlight();
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Voltage Meter");
+  lcd.print("Voltage Measure");
   delay(1000);
   lcd.clear();
 }
 
 void loop() {
-  int raw = analogRead(analogPin);
-  float voltage = raw * (vRef / 1023.0);
-  Serial.print("Raw = ");
-  Serial.print(raw);
+# Reads voltage data
+  int data = analogRead(analogPin);
+  float voltage = data * (vRef / 1023.0);
+# Displays voltage
   Serial.print("   Voltage = ");
   Serial.println(voltage, 3);
   lcd.setCursor(0, 0);
